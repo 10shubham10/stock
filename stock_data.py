@@ -10,7 +10,7 @@ class Stock_data:
     def data_of_the_input_days(self,days):
         days_array = []
         self.days = days
-        # find the list of last 30 days
+        # find the list of days from today to the input days
         for i in range(0,self.days):
             start_date = datetime.datetime.now() - datetime.timedelta(i)
             # weekday module will return 5, 6 for saturdays and sunday which will be excluded from the code in the below line.
@@ -19,10 +19,13 @@ class Stock_data:
             else:
                 days_array.append(str(start_date.strftime("%d""%b""%Y").upper()))
         return days_array
+
+    # this method will get the connection and look for the files from the same link.
     def link_for_download(self,link,date,connection):
         self.connection = connection
         self.link = link
         self.date = date
+        # try except is used for the connection exceptions of internet, data not available, holiday date of stock, data not generated for the specific date.
         try:
             connection = requests.get(self.link, allow_redirects=True, timeout=200)
             open(str(datetime.datetime.now().date()) + "/cm" + date + "bhav.csv.zip", 'wb').write(connection.content)
