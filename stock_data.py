@@ -6,7 +6,7 @@ import pandas as pd
 class Stock_data:
     def __init__(self):
         pass
-    # this method will return the list of last thirty days excluding weekends.
+    # this method will return the list of last n days excluding weekends.
     def data_of_the_input_days(self,days):
         days_array = []
         self.days = days
